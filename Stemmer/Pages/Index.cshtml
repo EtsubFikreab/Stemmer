@@ -1,0 +1,74 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="stemmer-body">
+    <div class="translator2">
+        <h2>Document to be Stemmed</h2>
+        <form method="get" asp-page="Result">
+        <textarea asp-for="input!" name="input" placeholder="Enter text" id="input-text" class="translator-box" required></textarea>
+        <button type="submit" class="translator-controls">Stem to Amharic</button>
+        </form>
+    </div>
+</div>
+
+<script>
+
+</script>
+<style>
+
+    .stemmer-body {
+        width: calc(100% - 50%);
+        text-align: center;
+        justify-content: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        margin: auto;
+    }
+
+
+    .translator-container {
+        width: 80%;
+        max-width: 600px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .translator2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .translator-box {
+        width: 70vw;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        height: 40vh;
+        padding: 10px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        font-size: 16px;
+        resize: none;
+    }
+
+    .translator-controls {
+        padding: 10px 20px;
+        background-color: #a02c2e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .translator-controls:hover {
+            background-color: #5f1b1b;
+        }
+</style>
