@@ -81,6 +81,52 @@ namespace Stemmer.preprocessing
 
             return corpus.Trim();
         }
+        private static readonly Dictionary<char, char> VariantList = new(){
+        {'ሐ','ሀ'},
+        {'ኀ','ሀ'},
+        {'ሃ','ሀ'},
+        {'ሓ','ሀ'},
+        {'ኃ','ሀ'},
+        {'ሑ','ሁ'},
+        {'ኁ','ሁ'},
+        {'ሒ','ሂ'},
+        {'ኂ','ሂ'},
+        {'ሔ','ሄ'},
+        {'ኄ','ሄ'},
+        {'ሕ','ህ'},
+        {'ኅ','ህ'},
+        {'ሖ','ሆ'},
+        {'ኆ','ሆ'},
+        {'ሗ','ኋ'},
+        {'ሠ','ሰ'},
+        {'ሡ','ሱ'},
+        {'ሢ','ሲ'},
+        {'ሣ','ሳ'},
+        {'ሤ','ሴ'},
+        {'ሥ','ስ'},
+        {'ሦ','ሶ'},
+        {'ዐ','አ'},
+        {'ኣ','አ'},
+        {'ኧ','አ'},
+        {'ዑ','ኡ'},
+        {'ዒ','ኢ'},
+        {'ዓ','አ'},
+        {'ዔ','ኤ'},
+        {'ዕ','እ'},
+        {'ዖ','ኦ'},
+    };
+        public static string variantConverter(string word)
+        {
+            string nv = "";
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (VariantList.ContainsKey(word[i]))
+                    nv += VariantList[word[i]];
+                else
+                    nv += word[i];
+            }
+            return nv;
+        }
 
     }
 }

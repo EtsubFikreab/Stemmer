@@ -14,6 +14,7 @@ namespace Stemmer.Pages
         {
             this.input = input;
             this.lexicalyAnalyzed = LexicalAnalysis(input);
+            this.lexicalyAnalyzed = variantConverter(lexicalyAnalyzed);
             this.StopWordRemoved = RemoveStopwords(lexicalyAnalyzed);
             string[] splitString = StopWordRemoved.Split(' ');
 
