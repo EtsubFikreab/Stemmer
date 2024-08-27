@@ -14,6 +14,7 @@ namespace Stemmer.preprocessing
             public string word;
             public List<int> counter;
         }
+        private static readonly List<string> AmharicVowels = ["ea", "u", "i", "a", "E", "I", "o"];
         private static readonly Dictionary<string, char> AmharicWordlist = new()
 {
 {"heseteNa", 'y'},
@@ -2819,7 +2820,71 @@ namespace Stemmer.preprocessing
             Transliterated tr = new();
             tr.word = word;
             tr = Transliterate(tr, "am");
-            
+            if (AmharicWordlist.ContainsKey(tr.word))
+                return Transliterate(tr, "en").word;
+            //affix removal
+            //CvCv checking
+            char next = 'c';
+            char vowel = ':';
+            string cv = "";
+            if (AmharicVowels.Contains(tr.word[tr.word.Length - 1].ToString()))//if it ends with a vowel
+                for (int i = 0; i < tr.word.Length; i++)
+                {
+                    if (next == 'c')
+                    {
+                        cv += tr.word[i];
+                        next = 'v';
+                    }
+                    else
+                    {
+                        if (vowel == ':')//check beginning
+                            if (AmharicVowels.Contains(tr.word[i].ToString()))
+                            {
+                                vowel = tr.word[i];
+                                cv += 'e';
+                            }
+                            else
+                                break;
+                        else if (tr.word[i] == vowel && AmharicVowels.Contains(tr.word[i].ToString()))
+                            cv += 'e';
+                        else break;
+                        next = 'c';
+                    }
+                    if (i == tr.word.Length - 1)
+                    {
+                        tr.word = cv;
+                    }
+                }
+            if (AmharicWordlist.ContainsKey(tr.word))
+                return Transliterate(tr, "en").word;
+            //CvC checking
+            string cc, vv;
+            cv = "";
+            for (int i = 0; i < tr.word.Length; i++)
+            {
+                if (!AmharicVowels.Contains(tr.word[i].ToString()) && i + 1 < (tr.word.Length - 1))
+                {
+                    // Console.Write(i + " ");
+                    cc = tr.word[i].ToString();
+                    i++;
+                    if (AmharicVowels.Contains(tr.word[i].ToString()))
+                    {
+                        vv = tr.word[i].ToString();
+                        i++;
+                        // Console.WriteLine(tr.word[i]);
+                        // Console.WriteLine(tr.word.Length - 1 + " " + i);
+                        //Console.WriteLine(cc);
+                        if (i <= (tr.word.Length - 1) && !AmharicVowels.Contains(tr.word[i].ToString()) && tr.word[i].ToString() == cc)
+                        {
+
+                            tr.word = tr.word.Remove(i - 1, 2);
+
+                        }
+                    }
+
+                }
+            }
+
             for (int i = 0; i < Prefixes.Count; i++)
             {
                 if (AmharicWordlist.ContainsKey(tr.word))
