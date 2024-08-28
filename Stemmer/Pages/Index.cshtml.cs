@@ -12,7 +12,9 @@ namespace Stemmer.Pages
             _logger = logger;
         }
         [BindProperty]
-        public string? input { get; set; }
+        public string? body { get; set; }
+        [BindProperty]
+        public string? title { get; set; }
         public void OnGet()
         {
 
