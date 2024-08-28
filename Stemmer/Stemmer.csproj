@@ -6,4 +6,28 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="View\Search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="View\Search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="View\Search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Search.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="View\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+  </ItemGroup>
+
 </Project>
