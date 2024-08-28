@@ -1,25 +1,28 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Stemmer.preprocessing;
+using System.Data.SQLite;
+using static Stemmer.preprocessing.DBProcess;
 namespace Stemmer.Pages
 {
-    public class IndexModel : PageModel
+    public class SearchModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<SearchModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public SearchModel(ILogger<SearchModel> logger)
         {
             _logger = logger;
         }
-        [BindProperty]
-        public string? body { get; set; }
-        [BindProperty]
-        public string? title { get; set; }
-        public void OnGet()
-        {
 
+        public void onGet()
+        {
+      
         }
-        
+
+        [BindProperty]
+        public string? input { get; set; }
+
+
     }
 }
 

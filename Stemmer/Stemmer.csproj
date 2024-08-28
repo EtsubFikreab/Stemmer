@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Search.cshtml" />
+    <None Include="Pages\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

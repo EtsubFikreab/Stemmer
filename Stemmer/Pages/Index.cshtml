@@ -1,119 +1,77 @@
 ﻿@page
-@model IndexModel
+@model Stemmer.Pages.SearchModel
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Search";
 }
 
-<div class="stemmer-body">
-    <div class="translator-container">
-        <h2 class="translator-title">Document to be Added</h2>
-        <form method="get" asp-page="Adding">
-            <div class="search-wrapper">
-                <label>Ttite:</label>
-                <input type="text" asp-for="title!" name="title" id="search-input" placeholder="Enter document title..." class="search-input" />
-            </div>
-            <div class="text-area-wrapper">
-                <label>Body:</label>
-                <textarea asp-for="body!" name="body" placeholder="Enter text here..." id="input-text" class="translator-box" required></textarea>
-            </div>
-            <button type="submit" class="translator-controls">Add Document</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+
+
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 100px auto; /* Centers the container */
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 1px solid #dddddd;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+            .search-input:focus {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                outline: none;
+            }
+
+        .search-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #a02c2e;
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .search-button:hover {
+                background-color: #5f1b1b;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>@ViewData["Title"]</h1>
+        <form method="post" asp-page="SearchResult">
+            <input type="text" asp-for="input!" name="input" class="search-input" placeholder="Search..." />
+            <button type="submit" class="search-button">Search</button>
         </form>
     </div>
-</div>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
-
-    .stemmer-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
-    .translator-container {
-        width: 100%;
-        max-width: 700px;
-        background-color: #ffffff;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        padding: 40px;
-        text-align: center;
-    }
-
-    .translator-title {
-        font-size: 24px;
-        color: #333333;
-        margin-bottom: 30px;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    .search-wrapper {
-        position: relative;
-        margin-bottom: 30px;
-    }
-
-    .search-input {
-        width: 100%;
-        padding: 15px 20px;
-        border-radius: 50px;
-        border: 1px solid #dddddd;
-        font-size: 18px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease;
-    }
-
-        .search-input:focus {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            outline: none;
-        }
-
-    .text-area-wrapper {
-        position: relative;
-        margin-bottom: 30px;
-    }
-
-    .translator-box {
-        width: 100%;
-        height: 200px;
-        padding: 20px;
-        border: 1px solid #dddddd;
-        border-radius: 15px;
-        font-size: 16px;
-        resize: vertical;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease;
-    }
-
-        .translator-box:focus {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            outline: none;
-        }
-
-    .translator-controls {
-        width: 100%;
-        padding: 15px;
-        background-color: #a02c2e;
-        color: #ffffff;
-        border: none;
-        border-radius: 50px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-        .translator-controls:hover {
-            background-color: #5f1b1b;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-</style>
+</body>
+</html>

@@ -5,7 +5,7 @@ namespace Stemmer.preprocessing
 {
     public class DBProcess
     {
-        public String SearchResult( )
+        public String SearchResult()
         {
             string title = "ጄኔፈር ሎፔዝ በአራተኛ ፍቺዋ ከቤን አፍሌክ ጋር ልትለያይ ነው";
             byte[] utf8Bytes = Encoding.UTF8.GetBytes(title);
@@ -14,26 +14,26 @@ namespace Stemmer.preprocessing
             string query = "SELECT BODY FROM IR_data WHERE TITLE = @title";
 
             using (var connection = new SQLiteConnection(connectionString))
-{
-    connection.Open();
+            {
+                connection.Open();
 
-    using (var command = new SQLiteCommand(query, connection))
-    {
+                using (var command = new SQLiteCommand(query, connection))
+                {
                     // Add the parameter value to avoid SQL injection
                     command.Parameters.AddWithValue("@title", "%" + title + "%");
                     using (var reader = command.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                          
-                            retrievedTitle = reader.GetString(1);
-              //  string body = reader.GetString(1);
+                    {
+                        while (reader.Read())
+                        {
 
+                            retrievedTitle = reader.GetString(1);
+                            //  string body = reader.GetString(1);
+
+                        }
+                    }
+                }
             }
-        }
-    }
-}
-            if(retrievedTitle==" ") { retrievedTitle = "Did work"; };
+            if (retrievedTitle == " ") { retrievedTitle = "Did work"; };
             return retrievedTitle;
 
         }
