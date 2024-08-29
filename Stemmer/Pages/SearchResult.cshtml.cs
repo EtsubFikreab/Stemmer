@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Stemmer.preprocessing;
-using static Stemmer.preprocessing.DBProcess;
+using System.IO;
+using static Stemmer.preprocessing.LexicalAnalyzer;
+using static Stemmer.preprocessing.StopWordRemover;
+using static Stemmer.preprocessing.AmharicStemmer;
 namespace Stemmer.Pages
 {
     public class SearchResultModel : PageModel
@@ -9,20 +12,20 @@ namespace Stemmer.Pages
         [BindProperty]
         public string? input { get; set; }
 
-        public void OnGet(string input)
+        public void OnPost(string input)
         {
-            this.input = "ጄኔፈር ሎፔዝ በአራተኛ ፍቺዋ ከቤን አፍሌክ ጋር ልትለያይ ነው".Trim();
-            DBProcess dBProcess = new DBProcess();
-            this.Search = dBProcess.SearchResult();
-            if (this.Search == null)
+            this.input = input;
+            string initialProcessing = RemoveStopwords(variantConverter(LexicalAnalysis(input)));
+            string[] splitedString = initialProcessing.Split(' ');
+            string stem = "";
+            foreach (string s in splitedString)
             {
-                this.Search = "didn't work";
+                stem += Stem(s) + " ";
             }
-
-          
+            this.documents= ranking.rankedSearch(stem);
         }
         [BindProperty]
-        public string? Search { get; set; }    
+        public List<Document>? documents { get; set; }
 
     }
 }

@@ -7,23 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="View\Search.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="View\Search.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="View\Search.cshtml" />
+    <Compile Remove="View\**" />
+    <Content Remove="View\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="View\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Pages\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="View\" />
   </ItemGroup>
 
   <ItemGroup>

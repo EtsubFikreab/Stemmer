@@ -2,6 +2,15 @@
 @model Stemmer.Pages.SearchResultModel
 @{
 }
-<h3>Search Result</h3>
-<p>@Model.Search</p>
-<p>hello</p>
+<h3>Search Results for @Model.input</h3>
+@if (@Model.documents.Count == 0)
+{
+    <p>ከምንም ሰነድ ጋር አልተዛመደም</p>
+}
+<ul>
+@foreach(var document in @Model.documents)
+{ 
+    <li><a>@document.title</a></li>
+}
+</ul>
+
