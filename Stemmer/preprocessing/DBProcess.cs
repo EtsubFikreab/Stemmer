@@ -1,5 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.Reflection.Metadata;
+using Stemmer.preprocessing;
 using System.Text;
 
 namespace Stemmer.preprocessing
@@ -14,7 +15,15 @@ namespace Stemmer.preprocessing
             this.stemmedTitle = stemmedTitle;
             this.body = body;
             this.stemmedBody = stemmedBody;
-            this.stems = stemmedTitle + " " + stemmedBody;
+            stems = stemmedTitle + " " + stemmedBody;
+            string[] splitedString = stems.Split(' ');
+            stems = "";
+            AmharicStemmer.Transliterated transliterated = new();
+            foreach (string s in splitedString)
+            {
+                transliterated.word = s;
+                stems += AmharicStemmer.Transliterate(transliterated, "am").word + " ";
+            }
         }
 
         public int primaryKey;

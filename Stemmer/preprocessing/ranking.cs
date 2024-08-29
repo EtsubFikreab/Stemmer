@@ -72,7 +72,7 @@
             foreach (var pair in sortedIndexedSimilarity)
             {
                 Console.WriteLine(pair.Value);
-                if (pair.Value > 0.65)
+                if (pair.Value > 0.45)
                     rankedDocuments.Add(Documents[pair.Index]);
                 else break;
             }

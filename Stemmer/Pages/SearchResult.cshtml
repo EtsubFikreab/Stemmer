@@ -10,7 +10,43 @@
 <ul>
 @foreach(var document in @Model.documents)
 { 
-    <li><a>@document.title</a></li>
+        <form method="get" asp-page="DocumentDisplay">
+            <input type="text" asp-for="documentId" value="@document.primaryKey" hidden/>
+            <button class="button-46" type="submit">@document.title</button>
+        </form>
 }
 </ul>
+<style>
+.button-46 {
+  align-items: center;
+  background-color: rgba(240, 240, 240, 0.26);
+  border: 1px solid #DFDFDF;
+  border-radius: 16px;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 100%;
+  padding: 14px 22px;
+  text-decoration: none;
+  transition: all .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  margin-bottom:2ch;
+}
 
+.button-46:active,
+.button-46:hover {
+  outline: 0;
+}
+
+.button-46:hover {
+            background-color: #B9E6FF;
+  border-color: rgba(0, 0, 0, 0.19);
+}
+</style>
