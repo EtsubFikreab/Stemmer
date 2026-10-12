@@ -58,7 +58,11 @@
             List<double> similarity = new();
             for (int i = 0; i < Documents.Count; i++)
             {
-                similarity.Add(dotProduct[i] / (queryDistance * length[i]));
+                // a zero-length vector would divide by zero and give NaN, so score it 0
+                if (queryDistance == 0 || length[i] == 0)
+                    similarity.Add(0);
+                else
+                    similarity.Add(dotProduct[i] / (queryDistance * length[i]));
             }
 
             var indexedSimilarity = similarity
@@ -127,10 +131,10 @@
             Dictionary<string, double> weight = new();
             foreach (var word in tf.Keys)
             {
-                if (weight.ContainsKey(word))
-                    weight[word] = tf[word] * idf[word];
+                // a query term that never appears in the corpus has no idf, so it gets weight 0
+                weight[word] = tf[word] * (idf.TryGetValue(word, out double wordIdf) ? wordIdf : 0);
             }
-            return tf;
+            return weight;
         }
     }
 }
